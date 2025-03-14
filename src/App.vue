@@ -1,7 +1,10 @@
 <template>
     <div class="flex min-h-screen flex-col">
-        <!-- Header with blue background -->
-        <header class="bg-blue-600 px-6 py-16 text-center text-white">
+        <!-- Header with customizable background color -->
+        <header
+            class="px-6 py-16 text-center text-white"
+            :style="{ backgroundColor: color }"
+        >
             <h1 class="mb-2 text-5xl font-bold">{{ extractedName }} Widget</h1>
             <p class="text-xl">Your restaurant id = {{ restoId }}.</p>
         </header>
@@ -17,8 +20,8 @@
                     of your website.
                 </p>
 
-                <!-- Editable fields -->
-                <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+                <!-- Editable fields - added color picker -->
+                <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
                     <div>
                         <label
                             class="mb-2 block text-gray-300"
@@ -32,9 +35,7 @@
                         </h1>
                     </div>
                     <div>
-                        <label
-                            class="mb-2 block text-gray-300"
-                            for="colorSelect"
+                        <label class="mb-2 block text-gray-300" for="nameInput"
                             >Restaurant Name:</label
                         >
                         <h1
@@ -42,6 +43,25 @@
                         >
                             {{ extractedName }}
                         </h1>
+                    </div>
+                    <div>
+                        <label
+                            class="mb-2 block text-gray-300"
+                            for="colorPicker"
+                            >Widget Color:</label
+                        >
+                        <div class="flex items-center space-x-2">
+                            <input
+                                id="colorPicker"
+                                v-model="color"
+                                class="h-10 w-10 cursor-pointer rounded border border-gray-700 bg-transparent"
+                                type="color"
+                            />
+                            <span
+                                class="rounded bg-gray-800 px-2 py-1 text-white"
+                                >{{ color }}</span
+                            >
+                        </div>
                     </div>
                 </div>
 
@@ -65,7 +85,7 @@
 <span class="text-gray-500">12.</span>        <span class="text-white">})(document, </span><span class="text-green-400">"script"</span><span class="text-white">, </span><span class="text-green-400">"reservationWidgetScript"</span><span class="text-white">);</span>
 <span class="text-gray-500">13.</span>    <span class="text-white">});</span>
 <span class="text-gray-500">14.</span> <span class="text-blue-400">&lt;/script&gt;</span>
-<span class="text-gray-500">15.</span> <span class="text-blue-400">&lt;div</span> class=<span class="text-green-400">"widget-data"</span> restoId=<span class="text-green-400">"{{ restoId }}"</span> restoName=<span class="text-green-400">"{{ extractedName }}"</span><span class="text-blue-400">&gt;&lt;/div&gt;</span></pre>
+<span class="text-gray-500">15.</span> <span class="text-blue-400">&lt;div</span> class=<span class="text-green-400">"widget-data"</span> restoId=<span class="text-green-400">"{{ restoId }}"</span> restoName=<span class="text-green-400">"{{ extractedName }}"</span> color=<span class="text-green-400">"{{ color }}"</span><span class="text-blue-400">&gt;&lt;/div&gt;</span></pre>
                 </div>
 
                 <button
@@ -86,9 +106,9 @@
         name: 'App',
         setup() {
             const copyButtonText = ref('COPY');
-            const restoId = ref('Bistro Van Dimi');
-            const color = ref('red');
-            const extractedName = ref('Table.One Widget');
+            const restoId = ref('ID');
+            const color = ref('#3B82F6'); // Default color (blue-600)
+            const extractedName = ref('Name');
 
             // Parse URL parameters before mounting the component
             onBeforeMount(() => {
@@ -114,6 +134,13 @@
                     restoId.value = uidParam;
                     console.log('Extracted uid:', restoId.value);
                 }
+
+                // Get color parameter
+                const colorParam = urlParams.get('color');
+                if (colorParam) {
+                    color.value = decodeURIComponent(colorParam);
+                    console.log('Extracted color:', color.value);
+                }
             });
 
             const codeSnippet = computed(() => {
@@ -131,7 +158,7 @@
         })(document, "script", "reservationWidgetScript");
     });
 <\/script>
-<div class="widget-data" restoId="${restoId.value}" color="${color.value}"><\/div>`;
+<div class="widget-data" restoId="${restoId.value}" restoName="${extractedName.value}" color="${color.value}"><\/div>`;
             });
 
             const copyCode = () => {
