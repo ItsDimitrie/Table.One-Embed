@@ -1,31 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Table.One-Embed/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
-    <script type="module" crossorigin src="/Table.One-Embed/assets/index-zslugOuY.js"></script>
-    <link rel="stylesheet" crossorigin href="/Table.One-Embed/assets/index-_HYAclFh.css">
-  </head>
-  <body>
-    <div id="app"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/Table.One-Embed/vite.svg"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite + Vue + TS</title>
+        <script
+            type="module"
+            crossorigin
+            src="/Table.One-Embed/assets/index-zslugOuY.js"
+        ></script>
+        <link
+            rel="stylesheet"
+            crossorigin
+            href="/Table.One-Embed/assets/index-_HYAclFh.css"
+        />
+    </head>
+    <body>
+        <div id="app"></div>
 
         <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            (function (document, script, scriptId) {
-              const firstScript = document.getElementsByTagName(script)[0];
-              if (document.getElementById(scriptId)) return;
+            document.addEventListener('DOMContentLoaded', function () {
+                (function (document, script, scriptId) {
+                    const firstScript =
+                        document.getElementsByTagName(script)[0];
+                    if (document.getElementById(scriptId)) return;
 
-              const scriptElement = document.createElement(script);
-              scriptElement.src = "https://itsdimitrie.github.io/table.one-widget-test/embed.js";
-              // scriptElement.src = "http://localhost:5173/table.one-widget-test/embed.js";
+                    const scriptElement = document.createElement(script);
+                    scriptElement.src =
+                        'https://itsdimitrie.github.io/table.one-widget-test/embed.js';
+                    // scriptElement.src = "http://localhost:5173/table.one-widget-test/embed.js";
 
-              firstScript.parentNode?.insertBefore(scriptElement, firstScript);
-            })(document, "script", "reservationWidgetScript");
-          });
+                    firstScript.parentNode?.insertBefore(
+                        scriptElement,
+                        firstScript,
+                    );
+                })(document, 'script', 'reservationWidgetScript');
+            });
         </script>
-        
+
         <div class="widget-data" restoId="Bistro Van Dimi" color="red"></div>
-  </body>
+    </body>
 </html>
